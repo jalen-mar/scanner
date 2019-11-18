@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.jalen-mar'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    sourceSets{
+        main{
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    api files('libs/zbardecoder.jar')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+}
+
