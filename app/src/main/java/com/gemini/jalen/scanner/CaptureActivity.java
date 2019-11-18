@@ -82,18 +82,16 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
         scanLine = findViewById(R.id.capture_scan_line);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 findViewById(R.id.capture_mask_top).getLayoutParams();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+        params.height = (int) ((outMetrics.heightPixels -
+                (200 * getResources().getDisplayMetrics().density + 0.5f * (200 >= 0 ? 1 : -1))) / 2);
         int width = getIntent().getIntExtra(INTENT_WIDTH, 0);
         int height = getIntent().getIntExtra(INTENT_HEIGHT, 0);
         if (width != 0 && height != 0) {
             params = (RelativeLayout.LayoutParams) scanCropView.getLayoutParams();
             params.width = width;
             params.height = height;
-        } else {
-            DisplayMetrics outMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-            params.height = (int) ((outMetrics.heightPixels -
-                    (200 * getResources().getDisplayMetrics().density + 0.5f * (200 >= 0 ? 1 : -1))) / 2);
-
         }
         String title = getIntent().getStringExtra(INTENT_TITLE);
         if (title != null) {
